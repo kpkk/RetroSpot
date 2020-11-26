@@ -2,14 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="F:/RetroSpotTesting/src/test/java/com/org/LoginTest.java">
+        <parameter name="TeamName" value="MyTeam"></parameter>
         <classes>
-            <class name="com.org.RetroTests">
-                <methods>
-<!--                    <include name="testLogin"/>-->
-<!--                    <include name="signUp"/>-->
-                    <include name="createTeam"/>
-                </methods>
-            </class>
+            <class name="TestCases.TC01_LoginTest"/>
+            <class name="TestCases.TC02_SignUp"/>
         </classes>
     </test>
 </suite>

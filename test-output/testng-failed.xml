@@ -2,12 +2,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [All Test Suite]">
   <test thread-count="5" name="F:/RetroSpotTesting/src/test/java/com/org/LoginTest.java(failed)">
+    <parameter name="TeamName" value="MyTeam"/>
     <classes>
-      <class name="com.org.RetroTests">
+      <class name="TestCases.TC02_SignUp">
         <methods>
-          <include name="signUp"/>
+          <include name="tearDown"/>
+          <include name="setData"/>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+          <include name="signUp" invocation-numbers="0"/>
+          <include name="startTest"/>
         </methods>
-      </class> <!-- com.org.RetroTests -->
+      </class> <!-- TestCases.TC02_SignUp -->
     </classes>
   </test> <!-- F:/RetroSpotTesting/src/test/java/com/org/LoginTest.java(failed) -->
 </suite> <!-- Failed suite [All Test Suite] -->
