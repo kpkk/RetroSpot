@@ -4,8 +4,9 @@
     <test verbose="2" preserve-order="true" name="F:/RetroSpotTesting/src/test/java/com/org/LoginTest.java">
         <parameter name="TeamName" value="MyTeam"></parameter>
         <classes>
-            <class name="TestCases.TC01_LoginTest"/>
-            <class name="TestCases.TC02_SignUp"/>
+<!--            <class name="TestCases.TC01_LoginTest"/>-->
+<!--            <class name="TestCases.TC02_SignUp"/>-->
+            <class name="TestCases.TC03_CreateTeam"/>
         </classes>
     </test>
 </suite>

@@ -1,5 +1,6 @@
 package TestCases;
 
+import Pages.SignUpPage;
 import com.org.Wrappers;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class TC02_SignUp extends Wrappers {
+public class TC02_SignUp extends SignUpPage {
 
     @BeforeClass
     public void setData() {
@@ -22,18 +23,15 @@ public class TC02_SignUp extends Wrappers {
     @Test(dataProvider = "fetchdata")
     public void signUp(String fullName, String emailId, String pass) throws IOException {
         launchBrowser();
-        WebElement signupLink = locateElemenent("xpath", "//a[text()='Signup']");
+        WebElement signupLink = signUpLinkField();
         clickEle(signupLink);
-        WebElement fullname = locateElemenent("id", "username");
-       // fullname.sendKeys(fullName);
+        WebElement fullname = fullNameField();
         enterKeys(fullName,fullname);
-        WebElement email = locateElemenent("id", "email");
-      //  email.sendKeys(emailId);
+        WebElement email = emailField();
         enterKeys(emailId,email);
-        WebElement password = locateElemenent("xpath", "//input[@id='password']");
-       // password.sendKeys(pass);
+        WebElement password = passwordField();
         enterKeys(pass,password);
-        WebElement submit = locateElemenent("xpath", "//button[text()='SignUp']");
+        WebElement submit = submitForm();
         clickEle(submit);
 
     }

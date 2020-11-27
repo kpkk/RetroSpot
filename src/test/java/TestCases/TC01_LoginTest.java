@@ -1,5 +1,6 @@
 package TestCases;
 
+import Pages.LoginPage;
 import com.org.Wrappers;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class TC01_LoginTest extends Wrappers {
+public class TC01_LoginTest extends LoginPage {
 
     @BeforeClass
     public void setData() {
@@ -21,14 +22,13 @@ public class TC01_LoginTest extends Wrappers {
     @Test( dataProvider="fetchdata")
     public void testLogin(String uname, String pass) throws IOException {
         launchBrowser();
-        WebElement username = locateElemenent("name", "username");
-       // username.sendKeys(uname);
-        enterKeys(uname,username);
-        WebElement password = locateElemenent("name", "password");
-        password.sendKeys(pass);
+        WebElement user = usernameField();
+        enterKeys(uname,user);
+        WebElement password = passwordField();
         enterKeys(pass,password);
-        WebElement login = locateElemenent("xpath", "//*[text()='Login']");
-        clickEle(login);
+        WebElement submit = submitButton();
+      //  WebElement login = locateElemenent("xpath", "//*[text()='Login']");
+        clickEle(submit);
         // wrp.tearDown();
     }
 }

@@ -33,17 +33,5 @@ public class RetroTests extends Wrappers {
 
 
 
-    @Test
-    @Parameters("TeamName")
-    public void createTeam(String NameOfTeam) throws IOException {
-        //wrp.launchBrowser();
-        //testLogin();
-        WebElement createTeam = locateElemenent("xpath", "//button[text()=' Create Team']");
-        createTeam.click();
-        WebElement teamName = locateElemenent("xpath", "//input[@name='teamName']");
-        teamName.sendKeys(NameOfTeam);
-        WebElement createButton = locateElemenent("xpath", "//button[text()='Create']");
-        createButton.click();
 
-    }
 }

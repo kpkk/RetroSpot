@@ -1,5 +1,6 @@
 package com.org;
 
+import Pages.LoginPage;
 import Utils.ReadFromExcel;
 
 import Utils.Report;
@@ -33,7 +34,6 @@ public class Wrappers extends Report {
         startTestCase();
 
     }
-   // testCaseName, testDescription, authors, category;
 
 
     public void launchBrowser() {
@@ -53,6 +53,15 @@ public class Wrappers extends Report {
 
 
     }
+
+    public void login(){
+        WebElement username = new LoginPage().usernameField();
+        enterKeys("krishnapradeep.kadarla@cognizant.com",username);
+        WebElement password = new LoginPage().passwordField();
+        enterKeys("pradeep5",password);
+        WebElement submit = new LoginPage().submitButton();
+        clickEle(submit);
+    }
     public WebElement locateElemenent(String locator, String value)  {
 
         try{
@@ -70,23 +79,29 @@ public class Wrappers extends Report {
             }
 
                 reportStep("PASS",locator+" has been identified by its "+ value);
+                 takeSnap();
 
 
 
         }catch (Exception e){
             reportStep("FAIL",locator+" has not been found by its "+ value);
 
+
         }
         reportStep("PASS",locator+" has been identified by its "+ value);
-
+        try {
+            takeSnap();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         return null;
     }
-    public long takeSnap() throws IOException {
+    public void takeSnap() throws IOException {
         long number = (long) Math.floor(Math.random() * 900000000L) + 10000000L;
         FileUtils.copyFile(driver.getScreenshotAs(OutputType.FILE),new File("./reports/images/"+number+".png"));
-        return number;
+
     }
 
     public void enterKeys(String text, WebElement element) {
@@ -95,9 +110,15 @@ public class Wrappers extends Report {
             element.clear();
             element.sendKeys(text);
             reportStep("PASS",text+" has been entered in the text box");
+            takeSnap();
         }
         catch (Exception e){
             reportStep("FAIl",text+" hasn't been entered in the text box");
+            try {
+                takeSnap();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
 
@@ -108,8 +129,14 @@ public class Wrappers extends Report {
         try{
             element.click();
             reportStep("PASS",element+" has been clicked succesfully");
+            takeSnap();
         }catch (Exception e){
             reportStep("FAIL",element+" hasn't been clicked succesfully");
+            try {
+                takeSnap();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
     }
