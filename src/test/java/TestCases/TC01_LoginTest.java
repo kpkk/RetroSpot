@@ -1,5 +1,6 @@
 package TestCases;
 
+import Pages.CreatTeamPage;
 import Pages.LoginPage;
 import com.org.Wrappers;
 import org.openqa.selenium.WebElement;
@@ -12,23 +13,25 @@ public class TC01_LoginTest extends LoginPage {
 
     @BeforeClass
     public void setData() {
-        testCaseName="Tc_01-LoginTest";
+        testCaseName="TC01_LoginTest";
         testDescription="Login to the RetroSpot application";
         authors="pradeep";
         category="smoke";
-        sheetName="sheet1";
+        sheetName="TC01_LoginTest";
     }
 
     @Test( dataProvider="fetchdata")
-    public void testLogin(String uname, String pass) throws IOException {
+    public void testLogin(String uname, String pass,String username) throws IOException, InterruptedException {
         launchBrowser();
         WebElement user = usernameField();
         enterKeys(uname,user);
         WebElement password = passwordField();
         enterKeys(pass,password);
         WebElement submit = submitButton();
-      //  WebElement login = locateElemenent("xpath", "//*[text()='Login']");
         clickEle(submit);
-        // wrp.tearDown();
+        WebElement loggedInuserText = new CreatTeamPage().getLoggedInUser(username);
+        verifyText(loggedInuserText,username);
+
+
     }
 }

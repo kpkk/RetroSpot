@@ -12,28 +12,30 @@ public class TC02_SignUp extends SignUpPage {
 
     @BeforeClass
     public void setData() {
-        testCaseName="Tc_02-SignupTest";
-        testDescription="Sign up to th Retrospot application";
-        authors="pradeep";
-        category="smoke";
-        sheetName="sheet2";
+        testCaseName = "TC02_SignUp";
+        testDescription = "Sign up to th Retrospot application";
+        authors = "pradeep";
+        category = "smoke";
+        sheetName = "TC02_SignUp";
     }
 
 
     @Test(dataProvider = "fetchdata")
     public void signUp(String fullName, String emailId, String pass) throws IOException {
         launchBrowser();
+        String emailpart = emailId + String.valueOf(randomNumber());
+        String finalEmail = emailpart+"@mail.com";
+        System.out.println(finalEmail);
         WebElement signupLink = signUpLinkField();
         clickEle(signupLink);
         WebElement fullname = fullNameField();
-        enterKeys(fullName,fullname);
+        enterKeys(emailpart, fullname);
         WebElement email = emailField();
-        enterKeys(emailId,email);
+        enterKeys(finalEmail, email);
         WebElement password = passwordField();
-        enterKeys(pass,password);
+        enterKeys(pass, password);
         WebElement submit = submitForm();
         clickEle(submit);
-
+        loginWithSpecificUser(finalEmail, pass);
     }
-
 }

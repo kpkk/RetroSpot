@@ -3,6 +3,7 @@ package TestCases;
 import Pages.CreatTeamPage;
 import Pages.LoginPage;
 import com.org.Wrappers;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -14,24 +15,40 @@ public class TC03_CreateTeam extends CreatTeamPage {
 
     @BeforeClass
     public void setData() {
-        testCaseName = "Tc_03-CreateTeam";
+        testCaseName = "TC03_CreateTeam";
         testDescription = "This test will create the team in the retrospot application";
         authors = "pradeep";
         category = "smoke";
-        sheetName = "sheet2";
+        sheetName = "TC03_CreateTeam";
     }
 
-    @Test
-    @Parameters("TeamName")
-    public void createTeam(String NameOfTeam) throws InterruptedException {
+    @Test(dataProvider = "fetchdata")
+    //@Parameters("TeamName")
+    public void createTeam(String template) throws InterruptedException {
+        String finalTeamName= "MyTeam"+randomGenerator(5);
         launchBrowser();
         login();
         WebElement teamButton = createTeamButton();
-        teamButton.click();
+        clickEle(teamButton);
         WebElement teamName = teamNameTextBox();
-        teamName.sendKeys(NameOfTeam);
+        enterKeys(finalTeamName,teamName);
         WebElement confirmButton = createConfirmButton();
-        confirmButton.click();
+        clickEle(confirmButton);
+        WebElement createdTeam = RetroTeamNameLink(finalTeamName);
+        verifyText(createdTeam, finalTeamName);
+        clickEle(createdTeam);
+        WebElement startRetro = startRetroLink();
+        clickEle(startRetro);
+        WebElement retroText = enterRetroName();
+        enterKeys(finalTeamName,retroText);
+        WebElement retroButton = createRetroButton();
+        clickEle(retroButton);
+        WebElement templates = selectTemplate(template);
+        clickEle(templates);
+        String[] templateSections = template.trim().split(",");
+        for(int i=0;i<templateSections.length;i++){
+            findElement("//span[text()='"+templateSections[i].trim()+"']");
+        }
 
 
     }
